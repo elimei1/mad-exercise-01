@@ -9,8 +9,8 @@ package at.ac.fhcampuswien
  * @constructor creates an instance of the class.
  * @see ld.main
  */
-data class CompareResult(val m: Int, val n: Int){
+data class CompareResult(val n: Int, val m: Int){
     override fun toString(): String {
-        return "Output: $m:$n"
+        return "Output: $n:$m"
     }
 }
