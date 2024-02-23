@@ -3,10 +3,32 @@
  */
 package at.ac.fhcampuswien
 
+import java.util.Scanner
+
 class App {
     // Game logic for a number guessing game
     fun playNumberGame(digitsToGuess: Int = 4) {
-        //TODO: build a menu which calls the functions and works with the return values
+        val scanner = Scanner(System.`in`)
+        val generatedNumber = generateRandomNonRepeatingNumber(digitsToGuess)
+
+        println("Guess the $digitsToGuess-digit number \n")
+        //println("$generatedNumber")
+
+        var guess: Int
+        var numberOfGuesses: Int = 1
+
+        do {
+            println("Guess number $numberOfGuesses:")
+            guess = scanner.nextInt()
+            val result = checkUserInputAgainstGeneratedNumber(guess, generatedNumber)
+
+            println(result.toString())
+            println("")
+            numberOfGuesses++
+        } while (result.m != digitsToGuess)
+
+        println("Wow that's the correct number! $generatedNumber \n" +
+                "It took you $numberOfGuesses tries.")
     }
 
     /**
@@ -24,8 +46,10 @@ class App {
      * @throws IllegalArgumentException if the length is more than 9 or less than 1.
      */
     val generateRandomNonRepeatingNumber: (Int) -> Int = { length ->
-        //TODO implement the function
-        0   // return value is a placeholder
+        if (length < 1 || length > 9) throw IllegalArgumentException("The number has to have 1 to 9 digits!")
+
+        val digits = (1..9).toList().shuffled().take(length).joinToString("")
+        digits.toInt()
     }
 
     /**
@@ -45,12 +69,37 @@ class App {
      * @throws IllegalArgumentException if the inputs do not have the same number of digits.
      */
     val checkUserInputAgainstGeneratedNumber: (Int, Int) -> CompareResult = { input, generatedNumber ->
-        //TODO implement the function
-        CompareResult(0, 0)   // return value is a placeholder
+        val inputDigits = input.toString()
+        val generatedDigits = generatedNumber.toString()
+
+        if (generatedDigits.length != inputDigits.length) {
+            throw IllegalArgumentException("The numbers don't have the same length!")
+        }
+
+        var n = 0
+        var m = 0
+        val list = mutableListOf<Char>()
+
+        for (i in inputDigits.indices) {
+            if (inputDigits[i] == generatedDigits[i]) {
+                m++
+            }
+            if (inputDigits[i] in generatedDigits && !list.contains(inputDigits[i])) {
+                n++
+                list.add(inputDigits[i])
+            }
+        }
+        CompareResult(n, m)
     }
 }
 
 fun main() {
-    println("Hello World!")
-    // TODO: call the App.playNumberGame function with and without default arguments
+    val app = App()
+    println("This is the Number Guessing Game! \n" +
+            "You have to guess which number I chose.\n" +
+            "correct digits : correct positions \n" +
+            "!!! GOOD LUCK !!! \n" +
+            "")
+    app.playNumberGame()
+    // app.playNumberGame(2)
 }
