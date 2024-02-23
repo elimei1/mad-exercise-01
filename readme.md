@@ -10,7 +10,11 @@
 ### Describe how Kotlin handles null safety. What are nullable types and non-null types in Kotlin? (0,5 points)
 
 <span style="color:blue">Provide your answer here! </span>
-> Note: you can also use code snippets to illustrate your answer. 
+In order to avoid the amount of null pointer exceptions, Kotlin has its own technique to handle null safety.
+By default it's not possible to assign null to a variable. This is called a `non-nullable type`. 
+So the compiler will alert an error, if the variable could be null during runtime. If it should be possible to assign null 
+to a variable, you have to explicitly tell Kotlin by adding a "?" after the type of the variable.
+Now this `nullable type` needs a "?" for calling it and also for casting.
 
 ```kotlin 
 // example code snippet
