@@ -12,7 +12,6 @@ class App {
         val generatedNumber = generateRandomNonRepeatingNumber(digitsToGuess)
 
         println("Guess the $digitsToGuess-digit number \n")
-        //println("$generatedNumber")
 
         var guess: Int
         var numberOfGuesses: Int = 1
@@ -20,7 +19,7 @@ class App {
         do {
             println("Guess number $numberOfGuesses:")
             guess = scanner.nextInt()
-            val result = checkUserInputAgainstGeneratedNumber(guess, generatedNumber)
+            val result = checkUserInputAgainstGeneratedNumber(generatedNumber, guess)
 
             println(result.toString())
             println("")
@@ -80,7 +79,7 @@ class App {
         var m = 0
         val list = mutableListOf<Char>()
 
-        for (i in inputDigits.indices) {
+        for (i in generatedDigits.indices) {
             if (inputDigits[i] == generatedDigits[i]) {
                 m++
             }
