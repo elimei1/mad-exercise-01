@@ -9,7 +9,7 @@
 ## Questions
 ### Describe how Kotlin handles null safety. What are nullable types and non-null types in Kotlin? (0,5 points)
 
-<span style="color:blue">Provide your answer here! </span>
+<span style="color:blue">Provide your answer here! \</span>
 In order to avoid the amount of null pointer exceptions, Kotlin has its own technique to handle null safety.
 By default it's not possible to assign null to a variable. This is called a `non-nullable type`. 
 So the compiler will alert an error, if the variable could be null during runtime. If it should be possible to assign null 
@@ -17,13 +17,37 @@ to a variable, you have to explicitly tell Kotlin by adding a "?" after the type
 Now this `nullable type` needs a "?" for calling it and also for casting.
 
 ```kotlin 
-// example code snippet
+
 val a: String = "value" // non-null type
+val b: String? = "hello" // nullable type
 ```
 
 ### What are lambda expressions and higher order functions in Kotlin? Why would you store a function inside a variable? (0,5 points)
 
 <span style="color:blue">Provide your answer here!</span>
+
+`Lambda expressions`
+A lambda expression can take in parameters and return a value. It uses curly braces "{}".
+In there are the parameters, an arrow "->" and the body. 
+```kotlin 
+val sum: (Int, Int) -> Int = { a, b -> a + b }
+```
+`Higher order functions`
+In contrast to lambda expressions, higher order functions take in functions as parameters and return a function.
+```kotlin
+fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
+    return operation(a, b)
+}
+```
+The benefits of storing a function inside a variable are: The possibility to reuse it. The flexibility of passing and returning them. 
+Readability and abstraction.
+```kotlin
+val isEven: (Int) -> Boolean = { it % 2 == 0 }
+
+val numbers = listOf(1, 2, 3, 4)
+val evenNumbers = numbers.filter(isEven)
+```
+
 
 ### Provide a solution for the following number guessing game inside `App.kt`. (3 points)
 
